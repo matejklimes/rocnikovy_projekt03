@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 
 class Genre(models.Model):
     nazev = models.CharField(max_length=20, verbose_name='Název žánru', help_text='Zadejte název žánru')
+    popis = models.TextField(blank=True, verbose_name='Popis žánru', help_text='Vložte popis žánru')
 
     class Meta:
         ordering = ['nazev']
