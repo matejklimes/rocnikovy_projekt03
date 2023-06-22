@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Game Detail{% endblock %}
+
+{% block content %}
+    <h1>Game Detail</h1>
+    <p><strong>Name:</strong> {{ game.jmeno }}</p>
+    <p><strong>Developers:</strong>
+        {% for developer in game.vyvojari.all %}
+            <a href="{% url 'developer_detail' developer.pk %}">{{ developer.jmeno }}</a>{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+    </p>
+    <p><strong>Genres:</strong>
+        {% for genre in game.zanry.all %}
+            <a href="{% url 'genre_detail' genre.pk %}">{{ genre.nazev }}</a>{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+    </p>
+    <p><strong>Release Year:</strong> {{ game.rok_vydani }}</p>
+    <p><strong>Description:</strong> {{ game.popis }}</p>
+    <p><strong>Playtime:</strong> {{ game.pocet_hodin }} hours</p>
+{% endblock %}

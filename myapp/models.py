@@ -24,7 +24,7 @@ class Developer(models.Model):
     class Meta:
         ordering = ['jmeno']
         verbose_name = 'Vývojář'
-        verbose_name_plural = 'Vývojáři'
+        verbose_name_plural = 'Vývojář'
 
     def __str__(self):
         return f'{self.jmeno}'
@@ -32,12 +32,11 @@ class Developer(models.Model):
 
 class Game(models.Model):
     jmeno = models.CharField(max_length=100, verbose_name='Jméno hry', help_text='Zadejte jméno hry', error_messages={'blank': 'Jméno hry musí být vyplněn'})
-    vyvojari = models.ManyToManyField(Developer)
+    vyvojari = models.ManyToManyField(Developer, verbose_name='Vývojáři')
     popis = models.TextField(blank=True, verbose_name='Popis hry', help_text='Vložte popis hry')
-    pocet_hodin = models.PositiveIntegerField(blank=True, null=True, validators=[MaxValueValidator(500)], verbose_name='Délka hry', help_text='Zadejte délu hry v hodinách (max. 500)')
+    pocet_hodin = models.PositiveIntegerField(blank=True, null=True, validators=[MaxValueValidator(500)], verbose_name='Délka hry', help_text='Zadejte délku hry v hodinách (max. 500)')
     rok_vydani = models.PositiveIntegerField(blank=True, null=True, validators=[MinValueValidator(1950), MaxValueValidator(2100)], verbose_name='Rok vydání', help_text='Zadejte rok vydání (1950 - 2100)')
-    zanry = models.ManyToManyField(Genre)
-    vyvojari = models.ForeignKey('Developer', on_delete=models.CASCADE, blank=True, null=True, verbose_name='Vývojáři')
+    zanry = models.ManyToManyField(Genre, verbose_name='Žánry')
 
     class Meta:
         ordering = ['jmeno']
@@ -46,6 +45,7 @@ class Game(models.Model):
 
     def __str__(self):
         return f'{self.jmeno} ({self.rok_vydani})'
+
 
 
 class Rating(models.Model):
@@ -69,4 +69,4 @@ class Rating(models.Model):
         verbose_name_plural = 'Recenze'
 
     def __str__(self):
-        return f'Recenze knihy {self.hra} od {self.recenzent} ({self.cas.year})'
+        return f'Recenze hry {self.hra} od {self.recenzent} ({self.cas.year})'

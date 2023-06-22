@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Games List{% endblock %}
+
+{% block content %}
+    <h1>Games List</h1>
+    <ul>
+        {% for game in games %}
+            <li><a href="{% url 'game_detail' game.pk %}">{{ game.jmeno }}</a> - {{ game.vyvojari.all|join:', ' }} ({{ game.rok_vydani }}) ({{ game.zanry.all|join:', ' }})</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

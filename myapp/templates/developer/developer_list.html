@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Developers List{% endblock %}
+
+{% block content %}
+    <h1>Developers List</h1>
+    <ul>
+        {% for developer in developers %}
+            <li><a href="{% url 'developer_detail' developer.pk %}">{{ developer.jmeno }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+

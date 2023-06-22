@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}My App{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <!-- Add header content here -->
+    </header>
+
+    <main>
+        {% block content %}
+        <!-- Default content if not overridden in child template -->
+        {% endblock %}
+    </main>
+
+    <footer>
+        <!-- Add footer content here -->
+    </footer>
+</body>
+</html>

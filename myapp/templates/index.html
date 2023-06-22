@@ -1,12 +1,18 @@
-<!DOCTYPE html>
-<html lang="cs">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game database</title>
-</head>
-<body>
-    <p>Hellooo</p>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}Games List{% endblock %}
+
+{% block content %}
+    <h1>Games List</h1>
+    <ul>
+        {% for game in games %}
+            <li>
+                <a href="{% url 'game_detail' game.pk %}">{{ game.jmeno }}</a> - 
+                {% for developer in game.vyvojari.all %}
+                    <a href="{% url 'developer_detail' developer.pk %}">{{ developer.jmeno }}</a>{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+                ({{ game.rok_vydani }}) ({{ game.zanry.all|join:', ' }})
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
